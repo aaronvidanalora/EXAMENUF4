@@ -11,7 +11,7 @@ export default function Header() {
                             <Link to="/" className="nav-link">Home</Link>
                         </li>
                         <li className="nav-item">
-                            <Link to="/crud" className="nav-link">Ranking</Link>
+                            <Link to="/crud" className="nav-link">Crud</Link>
                         </li>
                     </ul>
                 </div>
