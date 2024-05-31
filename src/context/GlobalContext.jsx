@@ -3,9 +3,9 @@ import { useState, useContext, createContext } from "react";
 const GlobalContext = createContext();
 
 export const GlobalProvider = ({ children }) => {
-    const [ titulo, setTitulo ] = useState('')
-    const [ historias, setHistorias ] = useState([]) // ME GUARDO EL JSON ENTERO PARA HACER LAS CARTAS
-    const [ dataHistoria, setDataHistoria ] = useState() // historia formulario
+    const [titulo, setTitulo] = useState('');
+    const [historias, setHistorias] = useState([]); 
+    const [dataHistoria, setDataHistoria] = useState(); 
 
     const actualizarHistoria = async (dataHistoria) => {
         try {
@@ -18,17 +18,17 @@ export const GlobalProvider = ({ children }) => {
             });
 
             if (!response.ok) {
-                throw new Error(`Error en la solicitud: ${response.statusText}`)
+                throw new Error(`Error en la solicitud: ${response.statusText}`);
             }
 
-            const data = await response.json()
-            console.log('Historia actualizada:', data)
+            const data = await response.json();
+            console.log('Historia actualizada:', data);
 
             await obtenerHistoria();
         } catch (error) {
-            console.error('Error actualizando la historia:', error)
+            console.error('Error actualizando la historia:', error);
         }
-    }
+    };
 
     const obtenerHistoria = async () => {
         try {
@@ -45,7 +45,7 @@ export const GlobalProvider = ({ children }) => {
         } catch (error) {
             console.error('Error fetching data:', error);
         }
-    }
+    };
 
     const borrarHistoria = async (id) => {
         try {
@@ -59,9 +59,9 @@ export const GlobalProvider = ({ children }) => {
         } catch (error) {
             console.error('Error:', error);
         }
-    }
+    };
 
-    const anadirHistoria = async ()  =>{
+    const anadirHistoria = async (dataHistoria) => {
         try {
             const response = await fetch(`https://json-examen.vercel.app/historias`, { 
                 method: 'POST',
@@ -76,24 +76,31 @@ export const GlobalProvider = ({ children }) => {
                 setHistorias(prevHistorias => [...prevHistorias, data]);
                 console.log('Historia añadida:', data);
             } else {
-                console.error('Error al borrar la historia');
+                console.error('Error al añadir la historia');
             }
         } catch (error) {
             console.error('Error:', error);
         }
-    }
-
+    };
 
     return (
-        <GlobalContext.Provider value={{ titulo, setTitulo, 
-                                        obtenerHistoria, actualizarHistoria, borrarHistoria, anadirHistoria,
-                                        historias, setHistorias,
-                                        dataHistoria, setDataHistoria }}>
+        <GlobalContext.Provider value={{ 
+            titulo, 
+            setTitulo, 
+            obtenerHistoria, 
+            actualizarHistoria, 
+            borrarHistoria, 
+            anadirHistoria,
+            historias, 
+            setHistorias,
+            dataHistoria, 
+            setDataHistoria 
+        }}>
             {children}
         </GlobalContext.Provider>
-    )    
-}
+    );
+};
 
 export const useGlobalContext = () => {
     return useContext(GlobalContext);
-}
+};
