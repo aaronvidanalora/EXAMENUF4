@@ -1,36 +1,36 @@
 import { useState, useEffect } from 'react';
 
 function TablaResueltos() {
-    const [ticketsResueltos, setTicketsResueltos] = useState([]);
+    const [ticketsResueltos, setTicketsResueltos] = useState([])
 
     useEffect(() => {
-        obtenerTicketsResueltos();
+        obtenerTicketsResueltos()
     }, []);
 
     const obtenerTicketsResueltos = async () => {
         try {
             const response = await fetch('https://json-examen.vercel.app/ticketsResueltos');
             const data = await response.json();
-            setTicketsResueltos(data);
+            setTicketsResueltos(data)
         } catch (error) {
-            console.error('Error fetching tickets resueltos:', error);
+            console.error('Error fetching tickets resueltos:', error)
         }
     };
 
     const borrarTicket = async (id) => {
         try {
-            const response = await fetch(`https://json-examen.vercel.app/ticketsResueltos/${id}`, { method: 'DELETE' });
+            const response = await fetch(`https://json-examen.vercel.app/ticketsResueltos/${id}`, { method: 'DELETE' })
             
             if (!response.ok) {
-                throw new Error('Error al borrar la historia');
+                throw new Error('Error al borrar la historia')
             }
     
  
             setTicketsResueltos(prevTicketsResueltos => {
-                return prevTicketsResueltos.filter(ticket => ticket.id !== id);
+                return prevTicketsResueltos.filter(ticket => ticket.id !== id)
             });
         } catch (error) {
-            console.error('Error:', error);
+            console.error('Error:', error)
         }
     };
     
@@ -71,4 +71,4 @@ function TablaResueltos() {
     );
 }
 
-export default TablaResueltos;
+export default TablaResueltos

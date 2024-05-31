@@ -10,19 +10,19 @@ function Login() {
     //     const password = document.querySelector('#pass').value.trim();
     //     const correoElectronico = document.querySelector('#email').value;
 
-    //     // Simular verificación en la base de datos
+    //     
     //     const usuarioEncontrado = users.find(usuario => usuario.email === email && usuario.password === password);
 
     //     if (usuarioEncontrado) {
-    //         // Inicio de sesión exitoso
+    //        
     //         setCorreoUsuarioActual(email);
     //         alert('Inicio de sesión exitoso');
     //         setSesionActiva(1);
 
-    //         // Llamar al componente de Panel después de mostrar el mensaje
+    //         
     //         return <Panel correoUsuarioActual={correoUsuarioActual} />;
     //     } else {
-    //         // Fallo en el inicio de sesión
+    //         
     //         alert('Error en el inicio de sesión. Verifica tus credenciales.');
     //     }
     // };
@@ -32,18 +32,18 @@ function Login() {
     // };
 
     // const handleCerrarSesion = () => {
-    //     // Encuentra el índice del usuario actual en el array
+    //    
     //     const index = users.findIndex(usuario => usuario.email === correoUsuarioActual);
 
     //     if (index !== -1) {
-    //         // Elimina el usuario actual del array
+    //        
     //         users.splice(index, 1);
 
-    //         // Limpia la sesión actual
+    //       
     //         setCorreoUsuarioActual(null);
     //         setSesionActiva(0);
 
-    //         // Redirige a la página de inicio de sesión
+    //        
     //         return <Login />;
     //     }
     // };

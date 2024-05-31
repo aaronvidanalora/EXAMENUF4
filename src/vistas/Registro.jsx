@@ -2,39 +2,8 @@ import { useState } from "react";
 
 
 export function Registre() {
-     const [nombre, setNombre] = useState('');
-     const [apellidos, setApellidos] = useState('');
-     const [email, setEmail] = useState('');
-     const [password, setPassword] = useState('');
-     const [rol, setRol] = useState('usuario');
-     const [alerta, setAlerta] = useState('');
-
-     const handleEnviar = () => {
-         if (!nombre || !apellidos || !email || !password || !rol) {
-             setAlerta('Por favor, completa todos los campos obligatorios.');
-             return;
-         }
-
-         const objeto = {
-             nombre: nombre,
-             apellidos: apellidos,
-             email: email,
-             password: password,
-             rol: rol
-         };
-
-
-
-  
-         setAlerta('Tu usuario ha sido registrado correctamente');
-
-         
-         setNombre('');
-         setApellidos('');
-         setEmail('');
-         setPassword('');
-         setRol('usuario');
-     };
+     
+    
 
     return (
         <div className="container">
