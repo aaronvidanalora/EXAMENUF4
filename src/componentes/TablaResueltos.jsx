@@ -1,4 +1,4 @@
-import  { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 
 function TablaResueltos() {
     const [ticketsResueltos, setTicketsResueltos] = useState([]);
@@ -16,6 +16,24 @@ function TablaResueltos() {
             console.error('Error fetching tickets resueltos:', error);
         }
     };
+
+    const borrarTicket = async (id) => {
+        try {
+            const response = await fetch(`https://json-examen.vercel.app/ticketsResueltos/${id}`, { method: 'DELETE' });
+            
+            if (!response.ok) {
+                throw new Error('Error al borrar la historia');
+            }
+    
+ 
+            setTicketsResueltos(prevTicketsResueltos => {
+                return prevTicketsResueltos.filter(ticket => ticket.id !== id);
+            });
+        } catch (error) {
+            console.error('Error:', error);
+        }
+    };
+    
 
     return (
         <table className="table mt-4">
@@ -45,7 +63,7 @@ function TablaResueltos() {
                         <td>{ticket.descripcion}</td>
                         <td>{ticket.alumno}</td>
                         <td><button className="btn btn-info" title="Ver comentarios"><i className="bi bi-chat-left-text"></i></button></td>
-                        <td><button className="btn btn-danger" title="Eliminar ticket"><i className="bi bi-trash3"></i></button></td>
+                        <td><button className="btn btn-danger" title="Eliminar ticket" onClick={() => borrarTicket(ticket.id)}><i className="bi bi-trash3"></i></button></td>
                     </tr>
                 ))}
             </tbody>

@@ -4,8 +4,8 @@ function TablaPendientes() {
     const [ticketsPendientes, setTicketsPendientes] = useState([]);
 
     useEffect(() => {
-        obtenerTicketsPendientes();
-    }, []);
+        obtenerTicketsPendientes()
+    }, [])
 
     const obtenerTicketsPendientes = async () => {
         try {
@@ -14,6 +14,23 @@ function TablaPendientes() {
             setTicketsPendientes(data);
         } catch (error) {
             console.error('Error fetching tickets pendientes:', error);
+        }
+    }
+
+    const borrarTicket = async (id) => {
+        try {
+            const response = await fetch(`https://json-examen.vercel.app/ticketsPendientes/${id}`, { method: 'DELETE' });
+            
+            if (!response.ok) {
+                throw new Error('Error al borrar la historia');
+            }
+    
+ 
+            setTicketsPendientes(prevTicketsPendientes => {
+                return prevTicketsPendientes.filter(ticket => ticket.id !== id);
+            });
+        } catch (error) {
+            console.error('Error:', error);
         }
     };
 
@@ -47,7 +64,7 @@ function TablaPendientes() {
                         <td><button className="btn btn-success" title="Resolver ticket">Resolver</button></td>
                         <td><button className="btn btn-warning" title="Añadir comentario"><i className="bi bi-pencil" data-bs-toggle="modal" data-bs-target="#exampleModal"></i></button></td>
                         <td><button className="btn btn-info" title="Ver comentarios"><i className="bi bi-chat-left-text"></i></button></td>
-                        <td><button className="btn btn-danger" title="Eliminar ticket"><i className="bi bi-trash3"></i></button></td>
+                        <td><button className="btn btn-danger" title="Eliminar ticket" onClick={() => borrarTicket(ticket.id)}><i className="bi bi-trash3"></i></button></td>
                     </tr>
                 ))}
             </tbody>
