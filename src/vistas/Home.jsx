@@ -1,4 +1,34 @@
+import React, { useState, useEffect } from 'react';
+
 function AdministracionIncidencias() {
+    const [ticketsPendientes, setTicketsPendientes] = useState([]);
+    const [ticketsResueltos, setTicketsResueltos] = useState([]);
+
+    useEffect(() => {
+        obtenerTicketsPendientes();
+        obtenerTicketsResueltos();
+    }, []);
+
+    const obtenerTicketsPendientes = async () => {
+        try {
+            const response = await fetch('https://json-examen.vercel.app/ticketsPendientes');
+            const data = await response.json();
+            setTicketsPendientes(data);
+        } catch (error) {
+            console.error('Error fetching tickets pendientes:', error);
+        }
+    };
+
+    const obtenerTicketsResueltos = async () => {
+        try {
+            const response = await fetch('https://json-examen.vercel.app/ticketsResueltos');
+            const data = await response.json();
+            setTicketsResueltos(data);
+        } catch (error) {
+            console.error('Error fetching tickets resueltos:', error);
+        }
+    };
+
     return (
         <main className="container mt-5">
             <h1>Administración de incidencias</h1>
@@ -20,20 +50,21 @@ function AdministracionIncidencias() {
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>123459</td>
-                        <td>18/04/2023</td>
-                        <td>T6</td>
-                        <td>DAW1</td>
-                        <td>PC3</td>
-                        <td>Error de impresora</td>
-                        <td>Ana Martínez</td>
-                        <td><button className="btn btn-success" title="Resolver ticket">Resolver</button></td>
+                    {ticketsPendientes.map(ticket => (
+                        <tr key={ticket.id}>
+                            <td>{ticket.codigo}</td>
+                            <td>{ticket.fecha}</td>
+                            <td>{ticket.aula}</td>
+                            <td>{ticket.grupo}</td>
+                            <td>{ticket.ordenador}</td>
+                            <td>{ticket.descripcion}</td>
+                            <td>{ticket.alumno}</td>
+                            <td><button className="btn btn-success" title="Resolver ticket">Resolver</button></td>
                         <td><button className="btn btn-warning" title="Añadir comentario"><i className="bi bi-pencil" data-bs-toggle="modal" data-bs-target="#exampleModal"></i></button></td>
                         <td><button className="btn btn-info" title="Ver comentarios"><i className="bi bi-chat-left-text"></i></button></td>
                         <td><button className="btn btn-danger" title="Eliminar ticket"><i className="bi bi-trash3"></i></button></td>
-                    </tr>
-                    
+                        </tr>
+                    ))}
                 </tbody>
             </table>
             <h2 className="mt-5">Tickets resueltos</h2>
@@ -48,22 +79,25 @@ function AdministracionIncidencias() {
                         <th>Ordenador</th>
                         <th>Descripción</th>
                         <th>Alumno</th>
+                        <th></th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>123457</td>
-                        <td>16/04/2023</td>
-                        <td>15/05/2023</td>
-                        <td>T7</td>
-                        <td>DAW2</td>
-                        <td>PC1</td>
-                        <td>Problema de conexión a Internet</td>
-                        <td>Maria López</td>
-                        <td><button className="btn btn-info" title="Ver comentarios"><i className="bi bi-chat-left-text"></i></button></td>
+                    {ticketsResueltos.map(ticket => (
+                        <tr key={ticket.id}>
+                            <td>{ticket.codigo}</td>
+                            <td>{ticket.fecha}</td>
+                            <td>{ticket.fechaResuelto}</td>
+                            <td>{ticket.aula}</td>
+                            <td>{ticket.grupo}</td>
+                            <td>{ticket.ordenador}</td>
+                            <td>{ticket.descripcion}</td>
+                            <td>{ticket.alumno}</td>
+                            <td><button className="btn btn-info" title="Ver comentarios"><i className="bi bi-chat-left-text"></i></button></td>
                         <td><button className="btn btn-danger" title="Eliminar ticket"><i className="bi bi-trash3"></i></button></td>
-                    </tr>
-                   
+                        </tr>
+                    ))}
                 </tbody>
             </table>
         </main>
