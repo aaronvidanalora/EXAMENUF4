@@ -1,42 +1,40 @@
+import { useState } from "react";
 
 
 export function Registre() {
-    // const [nombre, setNombre] = useState('');
-    // const [apellidos, setApellidos] = useState('');
-    // const [email, setEmail] = useState('');
-    // const [password, setPassword] = useState('');
-    // const [rol, setRol] = useState('usuario');
-    // const [alerta, setAlerta] = useState('');
+     const [nombre, setNombre] = useState('');
+     const [apellidos, setApellidos] = useState('');
+     const [email, setEmail] = useState('');
+     const [password, setPassword] = useState('');
+     const [rol, setRol] = useState('usuario');
+     const [alerta, setAlerta] = useState('');
 
-    // const handleEnviar = () => {
-    //     if (!nombre || !apellidos || !email || !password || !rol) {
-    //         setAlerta('Por favor, completa todos los campos obligatorios.');
-    //         return;
-    //     }
+     const handleEnviar = () => {
+         if (!nombre || !apellidos || !email || !password || !rol) {
+             setAlerta('Por favor, completa todos los campos obligatorios.');
+             return;
+         }
 
-    //     const objeto = {
-    //         nombre: nombre,
-    //         apellidos: apellidos,
-    //         email: email,
-    //         password: password,
-    //         rol: rol
-    //     };
+         const objeto = {
+             nombre: nombre,
+             apellidos: apellidos,
+             email: email,
+             password: password,
+             rol: rol
+         };
 
-    //     // Aquí debes manejar la lógica de persistencia de datos, por ejemplo, con localStorage o una llamada a una API
 
-    //     // Ejemplo de cómo podrías mostrar una alerta
-    //     setAlerta('Tu usuario ha sido registrado correctamente');
 
-    //     // Llamar a la función de login
-    //     login();
+  
+         setAlerta('Tu usuario ha sido registrado correctamente');
 
-    //     // Limpieza de campos después de enviar el formulario
-    //     setNombre('');
-    //     setApellidos('');
-    //     setEmail('');
-    //     setPassword('');
-    //     setRol('usuario');
-    // };
+         
+         setNombre('');
+         setApellidos('');
+         setEmail('');
+         setPassword('');
+         setRol('usuario');
+     };
 
     return (
         <div className="container">

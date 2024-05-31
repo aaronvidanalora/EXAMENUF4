@@ -30,9 +30,9 @@ export const GlobalProvider = ({ children }) => {
         }
     };
 
-    const obtenerHistoria = async () => {
+    const obtenerTablaPendientes = async () => {
         try {
-            const response = await fetch('https://json-examen.vercel.app/historias', { method: 'GET' });
+            const response = await fetch('https://json-examen.vercel.app/ticketsPendientes', { method: 'GET' });
             const data = await response.json();
             
             if (Array.isArray(data)) {
@@ -87,7 +87,7 @@ export const GlobalProvider = ({ children }) => {
         <GlobalContext.Provider value={{ 
             titulo, 
             setTitulo, 
-            obtenerHistoria, 
+            obtenerTablaPendientes, 
             actualizarHistoria, 
             borrarHistoria, 
             anadirHistoria,
