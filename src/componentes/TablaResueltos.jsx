@@ -1,21 +1,22 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react'
 
 function TablaResueltos() {
     const [ticketsResueltos, setTicketsResueltos] = useState([])
 
     useEffect(() => {
         obtenerTicketsResueltos()
-    }, []);
+    }, [])
 
     const obtenerTicketsResueltos = async () => {
         try {
-            const response = await fetch('https://json-examen.vercel.app/ticketsResueltos');
-            const data = await response.json();
+            const response = await fetch('https://json-examen.vercel.app/ticketsResueltos')
+            const data = await response.json()
+            data.sort((a, b) => new Date(a.fecha) - new Date(b.fecha))
             setTicketsResueltos(data)
         } catch (error) {
             console.error('Error fetching tickets resueltos:', error)
         }
-    };
+    }
 
     const borrarTicket = async (id) => {
         try {
@@ -25,15 +26,13 @@ function TablaResueltos() {
                 throw new Error('Error al borrar la historia')
             }
     
- 
             setTicketsResueltos(prevTicketsResueltos => {
                 return prevTicketsResueltos.filter(ticket => ticket.id !== id)
-            });
+            })
         } catch (error) {
             console.error('Error:', error)
         }
-    };
-    
+    }
 
     return (
         <table className="table mt-4">
@@ -68,7 +67,7 @@ function TablaResueltos() {
                 ))}
             </tbody>
         </table>
-    );
+    )
 }
 
 export default TablaResueltos
