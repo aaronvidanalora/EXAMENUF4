@@ -1,4 +1,4 @@
-import  { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 
 function TablaPendientes() {
     const [ticketsPendientes, setTicketsPendientes] = useState([])
@@ -11,6 +11,7 @@ function TablaPendientes() {
         try {
             const response = await fetch('https://json-examen.vercel.app/ticketsPendientes')
             const data = await response.json()
+            data.sort((a, b) => new Date(a.fecha) - new Date(b.fecha))
             setTicketsPendientes(data)
         } catch (error) {
             console.error('Error fetching tickets pendientes:', error)
@@ -84,5 +85,4 @@ function TablaPendientes() {
         </table>
     )
 }
-
 export default TablaPendientes
